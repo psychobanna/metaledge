@@ -26,7 +26,10 @@ export class AddCategoryComponent implements OnInit {
   categoryAll: any = [];
   status: string = "";
 
-  constructor(private spinner:NgxSpinnerService,private request:RequestsService,private route:Router,private toastr:ToastrService,private activetedrouter:ActivatedRoute) { }
+  constructor(private spinner:NgxSpinnerService,private request:RequestsService,private route:Router,private toastr:ToastrService,private activetedrouter:ActivatedRoute) {
+
+    this.showCategory();
+  }
 
   ngOnInit(): void {
     this.showCategory();
@@ -78,6 +81,7 @@ export class AddCategoryComponent implements OnInit {
       this.request.Post(url,formData).subscribe((res:any)=>{
         this.toastr.success(res.message);
         this.showCategory();
+        this.route.navigate(['admin/view-category'])
       },(err)=>{
         console.log(err)
         this.toastr.error(err.error.errors);

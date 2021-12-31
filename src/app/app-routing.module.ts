@@ -17,8 +17,12 @@ import { ViewProductComponent } from './Admin/pages/product/view/view.component'
 import { AuthGuard } from './guard/auth.guard';
 import { Error404Component } from './shared/error404/error404.component';
 import { AboutUsComponent } from './Website/pages/about-us/about-us.component';
+import { CollectionComponent } from './Website/pages/collection/collection.component';
 import { ContactUsComponent } from './Website/pages/contact-us/contact-us.component';
 import { HomeComponent } from './Website/pages/home/home.component';
+import { MultiBlogsComponent } from './Website/pages/multi-blogs/multi-blogs.component';
+import { ProductsComponent } from './Website/pages/products/products.component';
+import { SingleBlogComponent } from './Website/pages/single-blog/single-blog.component';
 import { WebsiteComponent } from './Website/website/website.component';
 
 const routes: Routes = [
@@ -89,6 +93,21 @@ const routes: Routes = [
   },
   {
     path: 'about-us', component: AboutUsComponent
+  },
+  {
+    path: 'collection', component: CollectionComponent
+  },
+  {
+    path: 'products', component: ProductsComponent
+  },
+  {
+    path: 'products/:id', component: ProductsComponent
+  },
+  {
+    path: 'multi-blogs', component: MultiBlogsComponent
+  },
+  {
+    path: 'single-blog', component: SingleBlogComponent
   },
   {
     path: 'forgot-password', component: ForgotpasswordComponent

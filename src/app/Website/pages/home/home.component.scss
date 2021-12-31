@@ -1,8 +1,14 @@
 
 h1,h2,h3,h4,h5,h6{
-  font-family: 'Dancing Script', cursive!important;
-  font-size: 34px;
-  font-weight: bold;
+  font-family: 'Lora', serif!important;
+  font-size: 36px;
   color: #d68662;
   text-transform: capitalize;
+}
+p {
+  font-family: 'Hind', sans-serif;
+  font-size: 15px;
+}
+.short-heading {
+  font-size: 20px!important;
 }

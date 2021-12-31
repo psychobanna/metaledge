@@ -12,8 +12,12 @@ export class HomeComponent implements OnInit {
   constructor(private request:RequestsService) { }
   sliderData:any = [];
   productData:any = [];
+  categoryData:any = [];
+  contentData:any;
   ngOnInit(): void {
+    this.contentData={"heading":"themetaledge", "content":"the best furniture"}
     this.viewBanner();
+    this.viewCategory();
     this.viewProduct();
   }
 
@@ -26,6 +30,11 @@ export class HomeComponent implements OnInit {
   viewProduct(){
     this.request.Get('view-active-product').subscribe((res:any)=>{
       this.productData = res.data;
+    });
+  }
+  viewCategory(){
+    this.request.Get('view-active-category/0').subscribe((res:any)=>{
+      this.categoryData = res.data;
     });
   }
 }

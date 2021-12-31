@@ -1,0 +1,20 @@
+.collection-box {
+    height: 250px;
+    color: #000;
+    transition: 0.5s;
+    border: 1px solid #d3d3d3;
+    border-radius: 18px;
+    box-shadow: 0px 0px 1px #d3d3d3;
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-transform: uppercase;
+}
+.collection-box:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 10px #d3d3d3;
+    background-color: rgba(0,0,0,0.5);
+    background-blend-mode: color;
+    font-size: 18px;
+    color: #fff;
+}

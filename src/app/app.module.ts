@@ -37,6 +37,16 @@ import { AddPageComponent } from './Admin/pages/page/add/add.component';
 import { ViewPageComponent } from './Admin/pages/page/view/view.component';
 import { AboutUsComponent } from './Website/pages/about-us/about-us.component';
 import { ContactUsComponent } from './Website/pages/contact-us/contact-us.component';
+import { CategoryGridComponent } from './shared/category-grid/category-grid.component';
+import { HeadingContentComponent } from './shared/heading-content/heading-content.component';
+import { BannerImageComponent } from './shared/banner-image/banner-image.component';
+import { NewsletterComponent } from './shared/newsletter/newsletter.component';
+import { BlogGridComponent } from './shared/blog-grid/blog-gridcomponent';
+import { CollectionComponent } from './Website/pages/collection/collection.component';
+import { ProductsComponent } from './Website/pages/products/products.component';
+import { MultiBlogsComponent } from './Website/pages/multi-blogs/multi-blogs.component';
+import { SingleBlogComponent } from './Website/pages/single-blog/single-blog.component';
+import { ImageDragDirective } from './Admin/directive/image-drag.directive';
 
 @NgModule({
   declarations: [
@@ -65,7 +75,17 @@ import { ContactUsComponent } from './Website/pages/contact-us/contact-us.compon
     AddPageComponent,
     ViewPageComponent,
     AboutUsComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    CategoryGridComponent,
+    HeadingContentComponent,
+    BannerImageComponent,
+    NewsletterComponent,
+    BlogGridComponent,
+    CollectionComponent,
+    ProductsComponent,
+    MultiBlogsComponent,
+    SingleBlogComponent,
+    ImageDragDirective
   ],
   imports: [
     BrowserModule,

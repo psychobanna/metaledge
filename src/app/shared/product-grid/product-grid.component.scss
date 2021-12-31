@@ -5,6 +5,8 @@
   border-style: solid;
   position: relative;
   overflow: hidden;
+  border-radius: 8px;
+    border-color: #cacaca;
 }
 .btn-cart {
   background: #d68662;
@@ -36,7 +38,6 @@
   box-shadow: 0 0 0 0.2rem transparent;
 }
 .product img{
-  height: 200px;
   object-fit: contain;
   object-position: center;
 }
@@ -59,4 +60,28 @@ h4{
   h4{
     font-size: 16px;
   }
+}
+
+.products {
+  position: relative;
+}
+span.sale {
+  position: absolute;
+  background: #d68662;
+  color: #fff;
+  padding: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  top: 0;
+  z-index: 999;
+  left: 0;
+}
+.product_name {
+  padding-top: 12px;
+}
+.product:hover .product_name b {
+  text-decoration: underline;
+}
+.product_image img.img-fluid {
+  border-radius: 8px;
 }

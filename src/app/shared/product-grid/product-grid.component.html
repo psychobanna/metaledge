@@ -1,43 +1,27 @@
 <div class="text-center product">
-  <span *ngIf="data?.discount_price != '0'" class="sale-bedge">Sale</span>
+  <!-- <span *ngIf="data?.discount_price != '0'" class="sale-bedge">Sale</span>
   <img src="{{ data.image }}" class="img-fluid"/>
   <h4>{{ data.name }}</h4>
   <span [class]="data?.discount_price !=  '0'?'text-strikethrow mr-1':''">{{ curr }}{{ data?.price }}</span>
   <span *ngIf="data?.discount_price != '0'">{{ curr }}{{ data?.discount_price }}</span>
   <div class="col-12 text-center form-btn">
     <button class="btn btn-cart" (click)="addToCart(data.id)"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
-    <button class="btn btn-cart" (click)="viewProduct(template1,data.id)"><i class="fa fa-eye" aria-hidden="true"></i></button>
+    <button class="btn btn-cart"><i class="fa fa-eye" aria-hidden="true"></i></button>
+  </div> -->
+
+
+  <div class="product_image" >
+    <img class="img-fluid" src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80">
+  </div> 
+  <div class="product_name">
+    <b> Lorem ipsum dolor sit</b>
+  </div> 
+  <span class="sale">Sale</span>
+  <div class="product-price">
+    <!-- <span class="price ">$50</span> -->
+    <span class="price text-strikethrow">$50</span>
+    <span class="discount_price">$40</span>
   </div>
+  
 </div>
 
-<ng-template #template1>
-  <div class="modal-header d-flex justify-content-end">
-    <button class="btn btn-danger" (click)="closeModel()">X</button>
-  </div>
-  <div class="modal-body">
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <img src="{{ product?.image }}" class="img-fluid">
-      </div>
-      <div class="col-12 col-md-6">
-        <h2>{{ product?.name }}</h2>
-        <b>
-          <span [class]="product?.discount_price !=  '0'?'text-strikethrow mr-1':''">{{ curr }}{{ product?.price }}</span>
-          <span *ngIf="product?.discount_price != '0'">{{ curr }}{{ product?.discount_price }}</span>
-        </b>
-        <div [innerHTML]="product?.description"></div>
-        <form [formGroup]="productForm">
-          <div class="form-group">
-            <label for="qty">Product Quantity</label>
-            <div class="d-flex">
-              <button type="button" class="btn btn-primary" (click)="productQTY(-1)">-</button>
-              <input type="number" class="form-control" id="qty" formControlName="qty" placeholder="0" start="1" step="1" value="0">
-              <button type="button" class="btn btn-primary" (click)="productQTY(+1)">+</button>
-              <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.qty }}</small>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</ng-template>

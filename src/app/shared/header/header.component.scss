@@ -6,6 +6,26 @@ nav {
   cursor: pointer;
 }
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link{
-  color:#d68662;
+  color:#d68662!important;
   font-weight: bold;
+  font-family: 'Karla', sans-serif!important;
+}
+.karla{
+  font-family: "Karla", sans-serif !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14PX;
+  color: #272220!important;
+  }
+  a.nav-link.karla {
+    padding: 7px 15px!important;
+}
+a.nav-link.karla:hover, .header-icon-part a.text-dark:hover {
+  color: #d68662!important;
+}
+a.nav-link.karla {
+  transition: .3s all;
+}
+.header-icon-part a.text-dark {
+  color: #a9a4a4!important;
 }

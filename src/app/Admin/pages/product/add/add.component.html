@@ -42,7 +42,7 @@
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </button>
                   <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
-                  <label class="imagedrag" *ngIf="imageSrc == ''">
+                  <label appImageDrag class="imagedrag" *ngIf="imageSrc == ''" (fileDropped)="onFileDropped($event)">
                     <input type="file" (change)="onFileChange($event)" class="d-none" id="image" formControlName="image" aria-describedby="image">
                   </label>
                 <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.image }}</small>

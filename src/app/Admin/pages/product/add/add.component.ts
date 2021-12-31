@@ -159,20 +159,30 @@ export class AddProductComponent implements OnInit {
     return Errors;
   }
 
+  onFileDropped(evt: any) {
+      let files = evt.dataTransfer.files;
+      this.onFileChange(files);
+      alert();
+  }
+
   // Show image
   onFileChange(event:any) {
-    const reader = new FileReader();
 
     if(event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      this.image = file
+      this.onUpload(file);
+    }
+  }
+
+  onUpload(file:any){
+    const reader = new FileReader();
+    this.image = file
       reader.readAsDataURL(file);
       reader.onload = () => {
         if(reader.result != ""){
           this.imageSrc = reader.result;
         }
       };
-    }
   }
 
   removeImage(){
