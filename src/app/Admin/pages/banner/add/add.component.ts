@@ -15,6 +15,7 @@ export class AddBannerComponent implements OnInit {
 
   bannerForm: FormGroup | any;
   validationMapping: any = {
+    'type': { required:"Type is required"},
     'title': { required:"Title is required"},
     'image': { required:"Image is required"}
   };
@@ -26,7 +27,7 @@ export class AddBannerComponent implements OnInit {
   bannerId: number = 0;
   categoryAll: any = [];
   status: string = "";
-
+  type: string = "";
   constructor(private spinner:NgxSpinnerService,private request:RequestsService,private route:Router,private toastr:ToastrService,private activetedrouter:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -45,20 +46,26 @@ export class AddBannerComponent implements OnInit {
       if(this.bannerId){
         this.request.Get('view-banner/'+this.bannerId).subscribe((res:any)=>{
           console.log(res)
-          this.bannerForm.patchValue({title:res.data.title,content:res.data.content,status:res.data.status});
+          this.bannerForm.patchValue({title:res.data.title,content:res.data.content,type:res.data.type,status:res.data.status});
           this.imageSrc = res.data.image;
+          this.type = res.data.type;
           if(res.data.status == 1){
             this.status = "checked";
           }else{
             this.status = "";
           }
         })
+      }else{
+        this.type = 'noone';
+        console.log(this.type)
       }
     });
   }
 
   onSubmit(){
     this.spinner.show();
+    this.bannerForm.value.image = this.image?this.image:'';
+    console.log(this.bannerForm)
     if (this.bannerForm.valid) {
       this.spinner.hide();
       const formData = new FormData();
@@ -66,6 +73,7 @@ export class AddBannerComponent implements OnInit {
         formData.append("image", this.image);
       }
       formData.append('title',this.bannerForm.value.title);
+      formData.append('type',this.bannerForm.value.type);
       formData.append('status', this.bannerForm.value.status?"1":"0");
       if(this.bannerForm.value.content){
         formData.append('content',this.bannerForm.value.content);
@@ -100,6 +108,7 @@ export class AddBannerComponent implements OnInit {
     if(this.bannerId == 0 || this.bannerId === undefined){
       this.bannerForm = new FormGroup({
         image: new FormControl('',[Validators.required]),
+        type: new FormControl('',[Validators.required]),
         title: new FormControl('',[Validators.required]),
         content: new FormControl(''),
         link: new FormControl(''),
@@ -109,6 +118,7 @@ export class AddBannerComponent implements OnInit {
     }else{
       this.bannerForm = new FormGroup({
         image: new FormControl(''),
+        type: new FormControl('',[Validators.required]),
         title: new FormControl('',[Validators.required]),
         content: new FormControl(''),
         link: new FormControl(''),
@@ -125,23 +135,60 @@ export class AddBannerComponent implements OnInit {
       if (controlErrors != null) Object.keys(controlErrors).forEach(keyError => {
         Errors[key] = errorMapping[key][keyError];
       });
+      setTimeout(() => {
+          this.validationField = false;
+          this.validationFieldMessage = "";
+      }, 3000);
     });
 
     return Errors;
   }
 
-  // Show image
-  onFileChange(event:any) {
-    const reader = new FileReader();
+  onDragOver(evt:any) {
+      evt.preventDefault();
+      evt.stopPropagation();
+  }
+  onDragLeave(evt:any) {
+      evt.preventDefault();
+      evt.stopPropagation();
 
+      console.log('Drag Leave');
+  }
+
+  ondrop(evt:any) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    const files = evt.dataTransfer.files;
+    if(files.length > 0){
+        this.onUpload(files[0]);
+        console.log(files)
+        console.log(`You dropped ${files.length}`);
+        return files;
+    }
+  }
+
+  onFileChange(event:any) {
     if(event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      this.image = file
+      this.onUpload(file);
+    }
+  }
+
+  onUpload(file:any){
+    const reader = new FileReader();
+    this.image = file
+    this.bannerForm.value.image = file;
+    console.log(file)
       reader.readAsDataURL(file);
       reader.onload = () => {
-        this.imageSrc = reader.result;
+        if(reader.result != ""){
+          this.imageSrc = reader.result;
+        }
       };
-    }
+
+      this.bannerForm = new FormGroup({
+        image: new FormControl(''),
+      })
   }
 
   removeImage(){

@@ -4,3 +4,11 @@
   width: 100%;
   background: #fff;
 }
+
+.imagedrag:after {
+  content: "Drag Category Image";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

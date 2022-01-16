@@ -1,0 +1,123 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-12 col-md-6 p-5">
+      <img class="img-fluid" [src]="productData?.image"/>
+    </div>
+    <div class="col-12 col-md-6 p-5">
+      <div class="product-name">
+        <h2>{{ productData?.name }}</h2>
+      </div>
+      <div class="product-price">
+        <span class="price " *ngIf="!productData?.discount_price">{{ curr }}{{ productData?.price }} </span>
+        <span class="price" *ngIf="productData?.discount_price"><del>{{ curr }}{{ productData?.price }}</del></span>
+        <span class="discount_price" *ngIf="productData?.discount_price">{{ curr }}{{ productData?.discount_price }} </span>
+        <div>
+          <span class="discount_price_off" *ngIf="productData?.discount_price">Get {{ discountOff(productData?.discount_price,productData?.price) }}% OFF </span>
+        </div>
+      </div>
+      <div class="form mt-5">
+        <form [formGroup]="productForm" (submit)="ProductFormSubmit()">
+          <input type="hidden" formControlName="productId" [value]="productId"/>
+            <div class="product-qty">
+                <div class="input-group">
+                  <span class="input-group-btn" (click)="productQTY(-1)">
+                      <button type="button" class="btn btn-brown rounded-0"  data-type="minus" data-field="">
+                        <span class="fa fa-minus"></span>
+                      </button>
+                  </span>
+                  <input type="text" id="quantity" name="quantity" formControlName="qty" class="input-number text-center border-1" value="0">
+                  <span class="input-group-btn" (click)="productQTY(1)">
+                      <button type="button" class="btn btn-brown rounded-0" data-type="plus" data-field="">
+                          <span class="fa fa-plus"></span>
+                      </button>
+                  </span>
+                </div>
+                <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.qty }}</small>
+            </div>
+            <div class="cart-button mt-3">
+              <button class="btn btn-brown">Add Cart</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-12">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button [class]="'text-brown nav-link'+(activeTab==1?' active':'')" (click)="SelecttedTab(1)" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">{{ tabDescription?.title }}</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button [class]="'text-brown nav-link'+(activeTab==2?' active':'')" (click)="SelecttedTab(2)"  id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Reviews</button>
+        </li>
+        <!-- <li class="nav-item" role="presentation">
+          <button [class]="'nav-link'+(activeTab==3?' active':'')" (click)="SelecttedTab(3)"  id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+        </li> -->
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div [class]="'tab-pane fade py-5'+(activeTab==1?' show active':'')" (click)="SelecttedTab(1)"  id="home" role="tabpanel" aria-labelledby="home-tab" [innerHTML]="tabDescription?.content">...</div>
+        <div [class]="'tab-pane fade py-5'+(activeTab==2?' show active':'')" (click)="SelecttedTab(2)" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="col-12 review-title d-flex justify-content-between">
+            <h4>Customer Review</h4>
+          </div>
+          <div class="col-12 review-form">
+            <form [formGroup]="ReviewForm" (submit)="onSubmitReview()">
+              <div class="mb-3">
+                <select class="form-select" aria-label="Default select example" formControlName="rating">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                <small *ngIf="validationFieldReview" class="text-danger">{{ validationFieldMessageReview.rating }}</small>
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name" formControlName="name">
+                <small *ngIf="validationFieldReview" class="text-danger">{{ validationFieldMessageReview.name }}</small>
+              </div>
+              <div class="mb-3">
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" formControlName="email">
+                <small *ngIf="validationFieldReview" class="text-danger">{{ validationFieldMessageReview.email }}</small>
+              </div>
+              <div class="mb-3">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Comment" formControlName="comment"></textarea>
+                <small *ngIf="validationFieldReview" class="text-danger">{{ validationFieldMessageReview.comment }}</small>
+              </div>
+              <div class="mb-3">
+                <button class="btn btn-brown">Review</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-12 border my-2">
+            <div *ngFor="let productReview of productReviews,let i=index">
+              <div class="border p-2 d-flex m-2"  *ngIf="numberReview > i">
+                <div class="col-4">
+                  <div class="review-name">
+                    <div><b>{{ productReview.name }}</b></div>
+                    <span *ngFor="let i of [1,2,3,4,5]" [class]="(productReview.rating>=i)?'fa fa-star':'fa fa-star-o'" data-jest="empty star"></span>
+                  </div>
+                </div>
+                <div class="col-8">
+                  <div>{{ productReview.email }}</div>
+                  <div>{{ productReview.comment }}</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="text-brown" (click)="loadMore(5)" *ngIf="totalReview >= numberReview">More</span>
+            </div>
+            <div>
+              <span class="text-brown" (click)="loadMore(5-numberReview)" *ngIf="totalReview <= numberReview && totalReview > 5">Less</span>
+            </div>
+          </div>
+        </div>
+        <div [class]="'tab-pane fade py-5'+(activeTab==3?' show active':'')" (click)="SelecttedTab(3)" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-newsletter></app-newsletter>
+<app-footer></app-footer>

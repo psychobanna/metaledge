@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { blog } from 'src/app/Admin/pages/blog/blog.model';
 
 @Component({
   selector: 'app-blog-grid',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogGridComponent implements OnInit {
 
+  @Input() blogData: blog | any;
   constructor() { }
 
   ngOnInit(): void {

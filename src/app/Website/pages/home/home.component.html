@@ -22,8 +22,12 @@
     <app-heading-content [contentData]="contentData" class="py-5 container"></app-heading-content>
 </section>
 
-
 <section class="py-2 container">
+  <div class="row">
+    <div class="col-12 text-center py-5">
+      <h2>Best Product</h2>
+    </div>
+  </div>
   <div class="row">
     <span *ngIf="productData.length == 0">No Products</span>
     <app-product-grid class="col-6 col-md-3 py-2" *ngFor="let product of productData" [data]="product"></app-product-grid>
@@ -31,23 +35,27 @@
 </section>
 
 <!-- banner images -->
-<section class="container">
-<app-banner-image class="row position-relative pt-5"></app-banner-image>
+<section class="container-fluid">
+<app-banner-image class="row position-relative pt-5" [bannerData]="bannerData"></app-banner-image>
 </section>
 
 <!-- blog -->
 <section class="container">
+  <div class="row">
+    <div class="col-12 text-center py-5">
+      <h2>Our Blogs</h2>
+    </div>
+  </div>
   <div class="row mb-2 pt-5">
-        <app-blog-grid class="col-md-6"></app-blog-grid>
-        <app-blog-grid class="col-md-6"></app-blog-grid>
-        <app-blog-grid class="col-md-6"></app-blog-grid>
-        <app-blog-grid class="col-md-6"></app-blog-grid>
+        <app-blog-grid class="col-md-6" *ngFor="let blog of blogData" [blogData]="blog"></app-blog-grid>
   </div>
  </section>
 
  <!-- newsletter -->
-<section class="container">
-  <app-newsletter class="row pt-5"></app-newsletter>
+<section class="border-top">
+  <div class="container ">
+    <app-newsletter class="row pt-5"></app-newsletter>
+  </div>
  </section>
 
 

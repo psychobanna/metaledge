@@ -1,8 +1,8 @@
 
   <div class="col-12 text-center">
     <img
-      class="img-fluid"
-      src="https://cdn.pixabay.com/photo/2015/12/06/09/15/maple-1079235__480.jpg"
+      class="img-fluid col-12"
+      [src]="bannerData?.image"
     />
   </div>
 
@@ -18,12 +18,9 @@
       translate-middle
     "
   >
-    <h2 class="banner_heading">serdtfjkl</h2>
+    <h2 class="banner_heading">{{ bannerData?.title }}</h2>
     <p class="banner_text">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
-      similique nihil dolorem est illo deleniti minima placeat facere quaerat
-      ipsam soluta autem incidunt, odit voluptatibus reprehenderit ducimus totam
-      corporis quis.
+      {{ bannerData?.content }}
     </p>
-    <button class="banner-button btn btn-primary banner_btn">Shop now</button>
+    <a [href]="bannerData?.link"><button class="banner-button btn btn-primary banner_btn">Shop now</button></a>
   </div>

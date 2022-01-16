@@ -1,16 +1,16 @@
+<hr/>
 <div class="col-12 text-center mx-auto">
-
     <h1 class="heading">Subcribe Now</h1>
     <p class="newsletter_text">Sign up to get the latest on sales, new releases and more …</p>
-    <form class="row d-flex align-items-center justify-content-center">
-      <div class="col-8">
-        <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
-        <div class="input-group col-12 input_newsletter">
-          <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+    <form class="col-12 text-left d-flex flex-wrap align-items-center justify-content-center" [formGroup]="Newsletterform" (submit)="onSubmit()">
+      <div class="col-12 col-md-5 my-2">
+        <label class="visually-hidden" for="inlineFormInputGroupEmail">Email</label>
+        <div class="input-group col-12 input_newsletter p-0">
+          <input type="email" class="form-control" id="inlineFormInputGroupEmail" placeholder="Email" formControlName="email">
         </div>
+        <small *ngIf="validationField" class="position-absolute text-danger ml-3">{{ validationFieldMessage.email }}</small>
       </div>
-
-      <div class="col-1 btn_newsletter">
+      <div class="col-12 col-md-1 my-2 btn_newsletter text-center">
         <button type="submit" class="btn btn-primary newsletter_btn">Submit</button>
       </div>
     </form>

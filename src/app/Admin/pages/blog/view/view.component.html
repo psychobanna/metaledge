@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Blog</h1>
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+      <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">View Blog</h6>
+      </div>
+      <div class="card-body" *ngIf="blogs.length > 0">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Content</th>
+                      <th>Image</th>
+                      <th>Status</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                      <th>Title</th>
+                      <th>Content</th>
+                      <th>Image</th>
+                      <th>Status</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                  <tr *ngFor="let blog of blogs">
+                      <td>{{ blog?.title }}</td>
+                      <td>{{ blog?.content?(blog.content).length == 10?blog.content:blog.content.substring(0,10)+'...':'' }}</td>
+                      <td><a href="{{ blog.image }}" target="_blank">Click Here</a></td>
+                      <td><button (click)="changeStatus(blog.id)" [class]="blog.status==1?'btn btn-primary':'btn btn-danger'"><i class="fa fa-circle"></i></button></td>
+                      <td><button [routerLink]="['/admin/add-blog',blog.id]" routerLinkActive="router-link-active"  class="btn btn-primary"><i class="fa fa-pen"></i></button></td>
+                      <td><button (click)="deleteBlog(blog.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div class="card-body" *ngIf="blogs.length == 0">No blog</div>
+    </div>
+</div>

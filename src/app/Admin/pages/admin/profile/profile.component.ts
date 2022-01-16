@@ -67,6 +67,10 @@ export class ProfileComponent implements OnInit {
       if (controlErrors != null) Object.keys(controlErrors).forEach(keyError => {
         Errors[key] = errorMapping[key][keyError];
       });
+      setTimeout(() => {
+          this.validationField = false;
+          this.validationFieldMessage = "";
+      }, 3000);
     });
 
     return Errors;

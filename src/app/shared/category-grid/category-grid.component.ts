@@ -11,7 +11,7 @@ export class CategoryGridComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.category)
+    // console.log(this.category)
   }
 
 }

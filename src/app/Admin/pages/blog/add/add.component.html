@@ -1,0 +1,41 @@
+<div class="container-md">
+  <div class="row">
+    <div class="col-12 col-lg-8">
+      <div class="py-5">
+          <div class="text-left">
+              <h1 class="h4 text-gray-900 mb-4">Add Blog</h1>
+          </div>
+          <form class="user" [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                  <input type="text" class="form-control" id="title" formControlName="title" aria-describedby="title" placeholder="Enter Blog Title">
+                  <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.title }}</small>
+              </div>
+              <div class="form-group">
+                  <ejs-richtexteditor formControlName="content" rows="10" placeholder="Content"></ejs-richtexteditor>
+                  <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.content }}</small>
+              </div>
+              <div class="form-group" (drop)="ondrop($event)" (dragover)="onDragOver($event)" (dropleave)="onDragLeave($event)">
+                  <button type="button" (click)="removeImage()" *ngIf="imageSrc" class="btn btn-danger removeimage">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                  <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
+                  <label class="imagedrag" *ngIf="imageSrc == ''">
+                    <input type="file" (change)="onFileChange($event)" class="d-none" id="image" formControlName="image" aria-describedby="image">
+                  </label>
+                <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.image }}</small>
+              </div>
+              <div class="form-group">
+                  <div class="custom-control custom-checkbox small">
+                      <input type="checkbox" class="custom-control-input" id="customCheck" formControlName="status" *ngIf="status" checked/>
+                      <input type="checkbox" class="custom-control-input" id="customCheck" formControlName="status" *ngIf="!status"/>
+                      <label class="custom-control-label" for="customCheck">Status</label>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-user btn-block">
+                  Submit
+              </button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>

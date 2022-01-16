@@ -11,7 +11,7 @@ export class OwnSliderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.data);
+    // console.log(this.data);
   }
 
 }

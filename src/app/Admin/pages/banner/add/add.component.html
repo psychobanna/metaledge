@@ -6,6 +6,21 @@
               <h1 class="h4 text-gray-900 mb-4">Add Banner</h1>
           </div>
           <form class="user" [formGroup]="bannerForm" (ngSubmit)="onSubmit()">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" formControlName="type" id="inlineRadio1" value="noone" [checked]="type=='noone'?'checked':''">
+                <label class="form-check-label" for="inlineRadio1">None</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" formControlName="type" id="inlineRadio2" value="banner" [checked]="type=='banner'?'checked':''">
+                <label class="form-check-label" for="inlineRadio2">Banner</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" formControlName="type" id="inlineRadio3" value="slider" [checked]="type=='slider'?'checked':''">
+                <label class="form-check-label" for="inlineRadio3">Slider</label>
+              </div>
+              <div>
+                <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.type }}</small>
+              </div>
               <div class="form-group">
                   <input type="text" class="form-control" id="title" formControlName="title" aria-describedby="title" placeholder="Enter Banner Title">
                   <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.title }}</small>
@@ -18,7 +33,7 @@
                   <input type="text" class="form-control" id="link" formControlName="link" aria-describedby="link" placeholder="Enter Banner Link">
                   <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.link }}</small>
               </div>
-              <div class="form-group">
+              <div class="form-group" (drop)="ondrop($event)" (dragover)="onDragOver($event)" (dropleave)="onDragLeave($event)">
                   <button type="button" (click)="removeImage()" *ngIf="imageSrc" class="btn btn-danger removeimage">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </button>

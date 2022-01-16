@@ -1,0 +1,18 @@
+.imagedrag {
+  height: 100px;
+  border: 1px dashed #d3d3d3;
+  width: 100%;
+  background: #fff;
+}
+.imagedrag:after {
+  content: "Drag Image";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+select#title{
+  appearance: auto;
+  color: #000;
+  padding: 0px;
+}

@@ -88,6 +88,7 @@ export class AddPageComponent implements OnInit {
   initializeForm() {
       this.pageForm = new FormGroup({
         image: new FormControl(''),
+        meun: new FormControl(''),
         title: new FormControl('',[Validators.required]),
         description: new FormControl('',[Validators.required]),
         status: new FormControl('')
@@ -101,23 +102,70 @@ export class AddPageComponent implements OnInit {
       if (controlErrors != null) Object.keys(controlErrors).forEach(keyError => {
         Errors[key] = errorMapping[key][keyError];
       });
+      setTimeout(() => {
+          this.validationField = false;
+          this.validationFieldMessage = "";
+      }, 3000);
     });
     return Errors;
   }
 
-  // Show image
-  onFileChange(event:any) {
-    const reader = new FileReader();
+  onDragOver(evt:any) {
+      evt.preventDefault();
+      evt.stopPropagation();
+  }
 
-    if(event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      this.image = file
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.imageSrc = reader.result;
-      };
+  onDragLeave(evt:any) {
+      evt.preventDefault();
+      evt.stopPropagation();
+
+      console.log('Drag Leave');
+  }
+
+  ondrop(evt:any) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    const files = evt.dataTransfer.files;
+    if(files.length > 0){
+        this.onUpload(files[0]);
+        console.log(files)
+        console.log(`You dropped ${files.length}`);
+        return files;
     }
   }
+
+  onFileChange(event:any) {
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      this.onUpload(file);
+    }
+  }
+
+  onUpload(file:any){
+    const reader = new FileReader();
+    this.image = file
+    console.log(file)
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        if(reader.result != ""){
+          this.imageSrc = reader.result;
+        }
+      };
+  }
+
+  // Show image
+  // onFileChange(event:any) {
+  //   const reader = new FileReader();
+
+  //   if(event.target.files && event.target.files.length) {
+  //     const [file] = event.target.files;
+  //     this.image = file
+  //     reader.readAsDataURL(file);
+  //     reader.onload = () => {
+  //       this.imageSrc = reader.result;
+  //     };
+  //   }
+  // }
 
   removeImage(){
     this.imageSrc = "";

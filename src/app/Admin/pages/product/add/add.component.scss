@@ -11,3 +11,10 @@
   align-items: center;
   height: 100%;
 }
+select#category, select#subcategory {
+  appearance: auto;
+}
+
+ngx-tags-input.form-control.input-lg {
+  height: 100px;
+}

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -13,7 +13,7 @@ import { HomeComponent } from './Website/pages/home/home.component';
 import { AuthGuard } from './guard/auth.guard';
 import { LoginComponent } from './Admin/pages/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RequestsService } from './service/requests.service';
 import { TokenInterceptorService } from './service/token-interceptor.service';
 import { ForgotpasswordComponent } from './Admin/pages/forgotpassword/forgotpassword.component';
@@ -47,6 +47,17 @@ import { ProductsComponent } from './Website/pages/products/products.component';
 import { MultiBlogsComponent } from './Website/pages/multi-blogs/multi-blogs.component';
 import { SingleBlogComponent } from './Website/pages/single-blog/single-blog.component';
 import { ImageDragDirective } from './Admin/directive/image-drag.directive';
+import { NgxTagsInputModule } from 'ngx-tags-input';
+import { ProductComponent } from './Website/pages/product/product.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddBlogComponent } from './Admin/pages/blog/add/add.component';
+import { ViewBlogComponent } from './Admin/pages/blog/view/view.component';
+import { TabsComponent } from './shared/tabs/tabs.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { UserLoginComponent } from './Website/pages/user/login/login.component';
+import { UserRegisterComponent } from './Website/pages/user/register/register.component';
+import { CartComponent } from './Website/pages/cart/cart.component';
+import { BlockSliderComponent } from './shared/block-slider/block-slider.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +96,15 @@ import { ImageDragDirective } from './Admin/directive/image-drag.directive';
     ProductsComponent,
     MultiBlogsComponent,
     SingleBlogComponent,
-    ImageDragDirective
+    ImageDragDirective,
+    ProductComponent,
+    AddBlogComponent,
+    ViewBlogComponent,
+    TabsComponent,
+    UserLoginComponent,
+    UserRegisterComponent,
+    CartComponent,
+    BlockSliderComponent
   ],
   imports: [
     BrowserModule,
@@ -95,13 +114,18 @@ import { ImageDragDirective } from './Admin/directive/image-drag.directive';
     BrowserAnimationsModule,
     RichTextEditorAllModule,
     ToastrModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxTagsInputModule,
+    NgxSpinnerModule,
+    FormsModule,
+    NgbModule
   ],
   providers: [AuthGuard, RequestsService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

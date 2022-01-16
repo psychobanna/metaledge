@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from 'ngx-toastr';
 import { RequestsService } from 'src/app/service/requests.service';
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   validationField: boolean = false;
   validationFieldMessage: any = {};
 
-  constructor(private spinner:NgxSpinnerService,private request:RequestsService,private route:Router) { }
+  constructor(private spinner:NgxSpinnerService,private request:RequestsService,private route:Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -34,7 +35,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("token",res.data.token);
         localStorage.setItem("admin-token",res.data.user.name);
         this.route.navigate(['/admin/dashboard']);
-      },(err)=>{console.log(err)});
+      },(err)=>{
+        console.log(err)
+        this.toastr.error((err.error.errors?.email)?(err.error.errors?.email):err.error.errors);
+      });
     }else{
       if (this.GetErrorsFromFormGroup(this.loginform, this.validationMapping)) {
         this.validationField = true;
@@ -58,6 +62,10 @@ export class LoginComponent implements OnInit {
       if (controlErrors != null) Object.keys(controlErrors).forEach(keyError => {
         Errors[key] = errorMapping[key][keyError];
       });
+      setTimeout(() => {
+          this.validationField = false;
+          this.validationFieldMessage = "";
+      }, 3000);
     });
 
     return Errors;

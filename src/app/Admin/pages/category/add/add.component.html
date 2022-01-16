@@ -6,10 +6,10 @@
               <h1 class="h4 text-gray-900 mb-4">Add Category</h1>
           </div>
           <form class="user" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
-              <div class="form-group">
+              <div class="form-group col-12 px-0">
                   <small class="text-danger">(Choose "Select Parent Category" if you add a parent category)</small>
-                  <select class="form-control" id="name" formControlName="parent_id" aria-describedby="parent_id" placeholder="Enter Category Parent">
-                    <option selected value="0">Select Parent Category</option>
+                  <select class="form-control m-0" id="name" formControlName="parent_id" aria-describedby="parent_id" placeholder="Enter Category Parent">
+                    <option [selected]="'selected'" value="0">Select Parent Category</option>
                     <option *ngFor="let category of categoryAll" value="{{ category.id }}">{{ category.name }}</option>
                   </select>
                   <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.name }}</small>
@@ -22,7 +22,7 @@
                   <textarea class="form-control" id="desc" formControlName="description" aria-describedby="desc" placeholder="Enter Category Description"></textarea>
                   <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.desc }}</small>
               </div>
-              <div class="form-group">
+              <div class="form-group" (drop)="ondrop($event)" (dragover)="onDragOver($event)" (dropleave)="onDragLeave($event)">
                   <button type="button" (click)="removeImage()" *ngIf="imageSrc" class="btn btn-danger removeimage">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </button>

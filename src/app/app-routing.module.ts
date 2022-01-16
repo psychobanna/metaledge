@@ -5,6 +5,8 @@ import { ChangePasswordComponent } from './Admin/pages/admin/change-password/cha
 import { ProfileComponent } from './Admin/pages/admin/profile/profile.component';
 import { AddBannerComponent } from './Admin/pages/banner/add/add.component';
 import { ViewBannerComponent } from './Admin/pages/banner/view/view.component';
+import { AddBlogComponent } from './Admin/pages/blog/add/add.component';
+import { ViewBlogComponent } from './Admin/pages/blog/view/view.component';
 import { AddCategoryComponent } from './Admin/pages/category/add/add.component';
 import { ViewCategoryComponent } from './Admin/pages/category/view/view.component';
 import { DashboardComponent } from './Admin/pages/dashboard/dashboard.component';
@@ -14,15 +16,20 @@ import { AddPageComponent } from './Admin/pages/page/add/add.component';
 import { ViewPageComponent } from './Admin/pages/page/view/view.component';
 import { AddProductComponent } from './Admin/pages/product/add/add.component';
 import { ViewProductComponent } from './Admin/pages/product/view/view.component';
+import { AppComponent } from './app.component';
 import { AuthGuard } from './guard/auth.guard';
 import { Error404Component } from './shared/error404/error404.component';
 import { AboutUsComponent } from './Website/pages/about-us/about-us.component';
+import { CartComponent } from './Website/pages/cart/cart.component';
 import { CollectionComponent } from './Website/pages/collection/collection.component';
 import { ContactUsComponent } from './Website/pages/contact-us/contact-us.component';
 import { HomeComponent } from './Website/pages/home/home.component';
 import { MultiBlogsComponent } from './Website/pages/multi-blogs/multi-blogs.component';
+import { ProductComponent } from './Website/pages/product/product.component';
 import { ProductsComponent } from './Website/pages/products/products.component';
 import { SingleBlogComponent } from './Website/pages/single-blog/single-blog.component';
+import { UserLoginComponent } from './Website/pages/user/login/login.component';
+import { UserRegisterComponent } from './Website/pages/user/register/register.component';
 import { WebsiteComponent } from './Website/website/website.component';
 
 const routes: Routes = [
@@ -72,6 +79,17 @@ const routes: Routes = [
       {
         path: 'view-product', component: ViewProductComponent, canActivate: [AuthGuard]
       },
+      // Blog
+
+      {
+        path: 'add-blog', component: AddBlogComponent, canActivate: [AuthGuard]
+      },
+      {
+        path: 'add-blog/:id', component: AddBlogComponent, canActivate: [AuthGuard]
+      },
+      {
+        path: 'view-blog', component: ViewBlogComponent, canActivate: [AuthGuard]
+      },
       // Page Content
 
       {
@@ -85,6 +103,17 @@ const routes: Routes = [
       },
       {
         path: '', redirectTo:'/admin/dashboard', pathMatch: 'full'
+      }
+    ]
+  },
+  {
+    path: 'user',component: AppComponent,
+    children:[
+      {
+        path: 'login',component: UserLoginComponent
+      },
+      {
+        path: 'register',component: UserRegisterComponent
       }
     ]
   },
@@ -104,6 +133,9 @@ const routes: Routes = [
     path: 'products/:id', component: ProductsComponent
   },
   {
+    path: 'product/:id', component: ProductComponent
+  },
+  {
     path: 'multi-blogs', component: MultiBlogsComponent
   },
   {
@@ -111,6 +143,9 @@ const routes: Routes = [
   },
   {
     path: 'forgot-password', component: ForgotpasswordComponent
+  },
+  {
+    path: 'cart',component: CartComponent
   },
   {
     path: '', redirectTo: "/home",pathMatch: 'full'

@@ -1,0 +1,31 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-12 col-md-6 p-5 mx-auto">
+      <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
+        <h1 class="h3 mb-3 fw-normal text-center">Sign In</h1>
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingInput" formControlName="email" placeholder="name@example.com">
+          <label for="floatingInput">Email address</label>
+          <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.email }}</small>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" formControlName="password" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+          <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.password }}</small>
+        </div>
+
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-brown" type="submit">Sign In</button>
+      </form>
+    </div>
+    <div class="col-12 col-md-12 p-5 mx-auto text-center text-brown">
+      <span routerLink="/user/register" style="cursor: pointer;">Sign Up</span>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,22 @@
+<div class="main-slider d-flex">
+  <div class="slider-item col-6 p-0" data-index="1" *ngFor="let item of items" [ngStyle]="{'position':'absolute','left':' '+(item + nextSlider)+'%','z-index':'5'}">
+    <div class="image-overlay">
+      <img src="https://www.thesprucepets.com/thmb/VtqqdYnQ6eKo0VRAGWd56W_jELA=/3120x2340/smart/filters:no_upscale()/red-eared-slider--trachemys-scripta-elegans--standing-on-wood--texas--usa-980454648-6abd20d07aa541679c70e47dd15144ee.jpg" class="slider-image img-fluid p-0"/>
+    </div>
+    <div class="outer-box">
+      <div class="inner-box">
+        <h1 class="title">Heading {{ item }}</h1>
+        <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <button class="btn btn-primary">read more</button>
+      </div>
+    </div>
+  </div>
+  <div class="arrow-navigate">
+    <span (click)="changeImageOnClick($event,-1)">
+      <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+    </span>
+    <span (click)="changeImageOnClick($event,1)">
+      <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+    </span>
+  </div>
+</div>

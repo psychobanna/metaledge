@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { RequestsService } from 'src/app/service/requests.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class ForgotpasswordComponent implements OnInit {
   validationField: boolean = false;
   validationFieldMessage: any = {};
 
-  constructor(private spinner:NgxSpinnerService,private request:RequestsService,private route:Router) { }
+  constructor(private spinner:NgxSpinnerService,private request:RequestsService,private route:Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -30,12 +31,16 @@ export class ForgotpasswordComponent implements OnInit {
   onSubmit(){
     this.spinner.show();
     if (this.forgotpasswordform.valid) {
-      this.spinner.hide();
       console.log(this.forgotpasswordform.value)
-      this.request.Post('login',this.forgotpasswordform.value).subscribe((res:any)=>{
-        localStorage.setItem("token",res.data.token);
-        this.route.navigate(['/admin/dashboard']);
-      },(err)=>{console.log(err)});
+      this.request.Post('forgot-password',this.forgotpasswordform.value).subscribe((res:any)=>{
+        console.log(res);
+        this.toastr.success("Your new password sent on your email");
+        this.spinner.hide();
+        // this.route.navigate(['/admin/login']);
+      },(err)=>{
+        console.log(err)
+        this.toastr.error("Your new password not sent on your email");
+      });
     }else{
       if (this.GetErrorsFromFormGroup(this.forgotpasswordform, this.validationMapping)) {
         this.validationField = true;
@@ -58,6 +63,10 @@ export class ForgotpasswordComponent implements OnInit {
       if (controlErrors != null) Object.keys(controlErrors).forEach(keyError => {
         Errors[key] = errorMapping[key][keyError];
       });
+      setTimeout(() => {
+          this.validationField = false;
+          this.validationFieldMessage = "";
+      }, 3000);
     });
 
     return Errors;

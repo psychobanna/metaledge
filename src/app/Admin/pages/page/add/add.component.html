@@ -14,16 +14,16 @@
                   <ejs-richtexteditor formControlName="description" rows="10"></ejs-richtexteditor>
                   <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.description }}</small>
               </div>
-              <div class="form-group">
-                  <select formControlName="menu" class="form-control">
+              <div class="form-inline mb-2">
+                  <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select Menu</label>
+                  <select formControlName="menu" class="custom-select my-1 col-12">
                     <option value="0">Select Menu</option>
                     <option value="1">Header</option>
                     <option value="2">Footer 1</option>
                     <option value="3">Footer 2</option>
                   </select>
-                  <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.menu }}</small>
               </div>
-              <div class="form-group">
+              <div class="form-group" (drop)="ondrop($event)" (dragover)="onDragOver($event)" (dropleave)="onDragLeave($event)">
                   <button type="button" (click)="removeImage()" *ngIf="imageSrc" class="btn btn-danger removeimage">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </button>

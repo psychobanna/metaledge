@@ -63,14 +63,33 @@
   </div>
   <div class="col-md-1 col-4 order-1 order-2">
     <ul class="nav navbar header-icon-part">
-      <li>
-        <a href="cart" class="text-dark"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+      <li class="cart">
+        <a href="#" routerLink="/cart" class="text-dark"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>{{ totalCartCount }}</span></a>
+        <div class="cart-container col-12 p-0" *ngIf="totalCartCount == 0">No item available in cart!</div>
+        <div *ngIf="totalCartCount != 0">
+          <div class="cart-container col-12">
+            <div class="cart-item d-flex flex-wrap" *ngFor="let item of totalCartItems,let i = index">
+              <div class="col-12 text-right"><span class="delete-cart" (click)="removeCartElement(i)">X</span></div>
+              <div class="col-4">
+                <img [src]="item.product.image" class="img-fluid"/>
+              </div>
+              <div class="col-8 d-flex flex-column">
+                <span>Name: {{ item.product.name }}</span>
+                <span>Price: ${{ item.product.price }}</span>
+                <span>Qty: {{ item.qty }}</span>
+              </div>
+            </div>
+            <div class="col-12 m-2 text-center">
+              <button class="btn btn-brown">Checkout</button>
+            </div>
+          </div>
+        </div>
       </li>
       <li>
-        <a href="cart" class="text-dark"><i class="fa fa-user" aria-hidden="true"></i></a>
+        <a href="#" routerLink="/user/login" class="text-dark"><i class="fa fa-user" aria-hidden="true"></i></a>
       </li>
       <li>
-        <a href="cart" class="text-dark"><i class="fa fa-search" aria-hidden="true"></i></a>
+        <a href="#" routerLink="/search" class="text-dark"><i class="fa fa-search" aria-hidden="true"></i></a>
       </li>
     </ul>
   </div>

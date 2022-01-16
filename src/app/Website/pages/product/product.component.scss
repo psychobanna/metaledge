@@ -1,0 +1,14 @@
+.btn-brown {
+  background: #d68662;
+  color: #fff;
+}
+.text-brown {
+  color: #d68662;
+}
+.text-brown:hover{
+  cursor: pointer;
+}
+.btn.focus, .btn:focus {
+  outline: 0;
+  box-shadow: none;
+}

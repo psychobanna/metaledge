@@ -85,3 +85,12 @@ span.sale {
 .product_image img.img-fluid {
   border-radius: 8px;
 }
+.product_image img.img-fluid {
+  height: 250px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.product .product_name:hover{
+  cursor: pointer;
+}

@@ -5,7 +5,7 @@
           <div class="text-left">
               <h1 class="h4 text-gray-900 mb-4">Add Product</h1>
           </div>
-          <form class="user" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+          <form class="user" [formGroup]="productForm" (ngSubmit)="onSubmit()" (keydown.enter)="handleEnterKeyPress($event)">
               <div class="form-group">
                   <input type="text" class="form-control" id="name" formControlName="name" aria-describedby="name" placeholder="Enter Product Name">
                   <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.name }}</small>
@@ -18,35 +18,35 @@
                   <input type="text" class="form-control" id="discount_price" formControlName="discount_price" aria-describedby="discount_price" placeholder="Enter Product Discount Price">
                   <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.discount_price }}</small>
               </div>
-              <div class="form-group">
-                  <select class="form-control" id="category" formControlName="category" aria-describedby="category" (change)="showSubcategory($event)">
-                    <option selected value="0">Select Category</option>
+              <div class="form-group col-12 px-0" *ngIf="categorycount != 0">
+                  <select class="form-control m-0" id="category" formControlName="category" aria-describedby="category" (change)="showSubcategory($event)">
+                    <option value="">Select Category</option>
                     <option *ngFor="let category of categoryAll" value="{{ category.id }}" [selected]="category.id == categoryId">{{ category.name }}</option>
                   </select>
                   <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.category }}</small>
               </div>
-              <div class="form-group">
-                  <select class="form-control" id="subcategory" formControlName="subcategory" aria-describedby="subcategory">
-                    <option selected value="0">Select Subcategory</option>
+              <div class="form-group col-12 px-0" *ngIf="subcategorycount != 0">
+                  <select class="form-control m-0" id="subcategory" formControlName="subcategory" aria-describedby="subcategory">
+                    <option [selected]="'selected'" value="0">Select Subcategory</option>
                     <option *ngFor="let subcategory of subcategoryAll" value="{{ subcategory.id }}" [selected]="subcategory.id == subCategoryId">{{ subcategory.name }}</option>
                   </select>
                   <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.category }}</small>
               </div>
               <div class="form-group">
-                  <ejs-richtexteditor formControlName="description" rows="10"></ejs-richtexteditor>
-                  <!-- <textarea class="form-control" id="desc" formControlName="description" aria-describedby="desc" placeholder="Enter Product Description"></textarea> -->
-                  <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.desc }}</small>
+                  <ejs-richtexteditor formControlName="description" rows="10" placeholder="Description"></ejs-richtexteditor>
               </div>
-              <div class="form-group">
+              <div class="form-group" (drop)="ondrop($event)" (dragover)="onDragOver($event)" (dropleave)="onDragLeave($event)">
                   <button type="button" (click)="removeImage()" *ngIf="imageSrc" class="btn btn-danger removeimage">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </button>
                   <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
-                  <label appImageDrag class="imagedrag" *ngIf="imageSrc == ''" (fileDropped)="onFileDropped($event)">
-                    <input type="file" (change)="onFileChange($event)" class="d-none" id="image" formControlName="image" aria-describedby="image">
+                  <label class="imagedrag" *ngIf="imageSrc == ''">
+                    <input type="file" class="d-none" (change)="onFileChange($event)" id="image" formControlName="image" aria-describedby="image">
                   </label>
                 <small *ngIf="validationField" class="text-danger">{{ validationFieldMessage.image }}</small>
               </div>
+              <ngx-tags-input class="form-control input-lg" (onTagsChanged)="onTagsChanged($event)" [removeLastOnBackspace]="removeLastOnBackspace" placeholder="Add Tags here" [(ngModel)]="tags" name="tags"  [ngModelOptions]="{standalone: true}"></ngx-tags-input>
+
               <div class="form-group">
                   <div class="custom-control custom-checkbox small">
                       <input type="checkbox" class="custom-control-input" id="customCheck" formControlName="status" *ngIf="status" checked/>

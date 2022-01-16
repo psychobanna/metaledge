@@ -40,6 +40,7 @@ export class ImageDragDirective {
             this.fileDropped.emit(files);
             console.log(files)
             console.log(`You dropped ${files.length}`);
+            return files;
         }
     }
 }
